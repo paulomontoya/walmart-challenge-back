@@ -1,0 +1,9 @@
+ 
+# Dependency directories
+node_modules/
+
+# ASDF nodejs
+.tool-versions
+
+# Build
+build/
