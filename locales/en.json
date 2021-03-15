@@ -1,0 +1,6 @@
+{
+  "errors": {
+    "InternalServer": "Something went wrong. Please try again.",
+    "FieldIsTooShort": "Field '{{field}}' is too short"
+  }
+}
