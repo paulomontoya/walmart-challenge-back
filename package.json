@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Walmart Challenge back",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "yarn migrate up && ts-node index.ts",
     "dev": "nodemon index.ts",
     "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx",
-    "test": "jest"
+    "test": "jest",
+    "migrate": "migrate -d $MONGO_URL --typescript --autosync"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "express": "^4.17.1",
     "factory-girl": "^5.0.4",
     "faker": "^5.4.0",
+    "migrate-mongoose-typescript": "^3.3.4",
     "mongodb": "^3.3.2",
     "mongoose": "^5.7.0",
     "mustache": "^4.1.0",

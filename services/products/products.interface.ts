@@ -6,13 +6,13 @@ export interface Product {
   description: string;
   image: string;
   price: number;
-  createdAt: Date;
 }
 
 export interface ProductDocument extends Product, Document {
+  createdAt: Date;
   // generated in getCustomDiscount
-  discount: number;
-  priceWithDiscount: number;
+  discount?: number;
+  priceWithDiscount?: number;
 
   getCustomDiscount(this: ProductDocument): ProductDocument;
 }

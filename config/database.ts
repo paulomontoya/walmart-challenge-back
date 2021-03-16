@@ -15,7 +15,7 @@ class Database {
         useCreateIndex: true,
       });
 
-      console.info(`Successfully connected to ${this.mongoURL}`);
+      if (process.env.NODE_ENV !== 'test') console.info('Successfully connected to mongo');
       return true;
     } catch (error) {
       console.error('Error connecting to database: ', error);
@@ -26,8 +26,6 @@ class Database {
   public async close(): Promise<boolean> {
     try {
       this.connection.connection.close();
-
-      console.info('Successfully closed mongo');
       return true;
     } catch (error) {
       console.error('Error closing mongo: ', error);

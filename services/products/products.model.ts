@@ -29,7 +29,7 @@ const schema = new mongoose.Schema<ProductDocument>(
       type: Date,
     },
   },
-  { collection: 'Products' },
+  { collection: 'products' },
 );
 
 async function save(next: NextFunction) {
@@ -57,6 +57,7 @@ schema.set('toJSON', {
   },
 });
 
+// eslint-disable-next-line func-names
 schema.methods.getCustomDiscount = function (this: ProductDocument) {
   const repeatedCharsRegex = /([a-zA-Z]).*(\1)/gim;
   const product = this.toJSON();

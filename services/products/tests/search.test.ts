@@ -1,9 +1,10 @@
 import supertest = require('supertest');
 import { factory } from 'factory-girl';
 import '../../../factories';
+import { LeanDocument } from 'mongoose';
 import app from '../../../index';
 import Database from '../../../config/database';
-import { Product, ProductDocument } from '../products.interface';
+import { ProductDocument } from '../products.interface';
 import Products from '../products.model';
 
 const request = supertest(app);
@@ -34,9 +35,9 @@ describe('Products search route', () => {
   });
 
   describe('With products', () => {
-    let productRDR: Product;
-    let productMoreThan50: Product;
-    let productWithoutDiscount: Product;
+    let productRDR: LeanDocument<ProductDocument>;
+    let productMoreThan50: LeanDocument<ProductDocument>;
+    let productWithoutDiscount: LeanDocument<ProductDocument>;
 
     beforeAll(async () => {
       productRDR = (
