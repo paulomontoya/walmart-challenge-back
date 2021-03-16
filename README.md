@@ -26,6 +26,5 @@ I'm hosting this with a free dyno in Heroku with Docker, so the performance is T
 
 ## Know issues
 
-- The search does not work with special characters like `á`
 - I'm not using `chai` or another library to help me with the tests of objects values
 - SKU field it's not `uniq: true`

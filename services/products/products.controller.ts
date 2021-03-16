@@ -9,6 +9,7 @@ class ProductsControllerClass {
     const query = {
       $text: {
         $search: queryPhrase,
+        $language: 'es',
       },
     };
 
