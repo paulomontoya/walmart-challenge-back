@@ -9,5 +9,6 @@ module.exports = {
     'import/extensions': 'off',
     'import/first': 'off',
     'no-underscore-dangle': 'off',
+    'consistent-return': 'off',
   },
 };
