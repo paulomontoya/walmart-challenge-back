@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { isNumber } from '../../utils/helpers';
 import Products from './products.model';
 
 class ProductsControllerClass {
@@ -12,6 +13,16 @@ class ProductsControllerClass {
     };
 
     try {
+      if (isNumber(queryPhrase)) {
+        const product = await Products.findOne({
+          sku: Number(queryPhrase),
+        });
+
+        if (product) {
+          return res.json([product.getCustomDiscount()]);
+        }
+      }
+
       const products = await Products.find(query, { score: { $meta: 'textScore' } }).sort({
         score: { $meta: 'textScore' },
       });

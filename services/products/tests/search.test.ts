@@ -42,6 +42,7 @@ describe('Products search route', () => {
     beforeAll(async () => {
       productRDR = (
         await factory.create<ProductDocument>('product', {
+          sku: 2,
           description: 'Juego Red Dead Redemption II',
           brand: 'Rockstar Games',
         })
@@ -64,7 +65,28 @@ describe('Products search route', () => {
       await Products.deleteMany({});
     });
 
-    it('should filter my search and show the correct discount values for brand match', async () => {
+    it('should filter my search and show the correct discount values for sku match', async () => {
+      const response = await request.get('/products/search/2');
+
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveLength(1);
+
+      const responseProduct = response.body[0];
+      const expectedDiscount = 0.5;
+
+      // TODO: Fix checking date
+      delete productRDR.createdAt;
+
+      expect(responseProduct).toEqual(
+        expect.objectContaining({
+          ...productRDR,
+          discount: expectedDiscount,
+          priceWithDiscount: productRDR.price * expectedDiscount,
+        }),
+      );
+    });
+
+    it('should filter my search and show the correct discount values for description match', async () => {
       const response = await request.get('/products/search/red dead redemption');
 
       expect(response.status).toBe(200);
