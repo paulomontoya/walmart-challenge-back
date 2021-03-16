@@ -1,0 +1,38 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Get current branch name
+        run: echo "##[set-output name=name;]$(echo ${GITHUB_REF#refs/heads/})"
+        shell: bash
+        id: branch
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: |
+          npm i -g yarn
+          yarn install
+      - name: Lint
+        run: |
+          yarn lint
+      - name: Tests
+        run: |
+          yarn test
+        env:
+          BRANCH: ${{ steps.branch.outputs.name }}
