@@ -8,7 +8,7 @@ import Database from './config/database';
 class App {
   public app = express();
 
-  public port = process.env.NODE_PORT || 4000;
+  public port = process.env.PORT || 4000;
 
   public listen() {
     this.app.listen(this.port, () => {

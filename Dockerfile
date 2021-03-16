@@ -1,7 +1,6 @@
 FROM node:14.16.0
 
-ARG NODE_PORT
-RUN echo "ARG NODE_PORT: $NODE_PORT"
+ARG PORT 
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -10,6 +9,6 @@ COPY . .
 
 RUN yarn install 
 
-EXPOSE ${NODE_PORT}
+EXPOSE ${PORT}
 
 CMD ["yarn", "start"]
